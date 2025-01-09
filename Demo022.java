@@ -2,22 +2,40 @@ import java.util.Scanner;
 
 public class Demo022 {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        taxcalc();
+    }
 
-        System.out.print("Enter monthly salary, HRA, and PF: ");
-        double monthlySalary = scanner.nextDouble();
-        double hra = scanner.nextDouble();
-        double pf = scanner.nextDouble();
+    public static void taxcalc() {
+        Scanner sc = new Scanner(System.in);
 
-        double annualSalary = monthlySalary * 12;
-        double taxableIncome = annualSalary - (hra + pf);
-        
-        double tax = taxableIncome <= 500000 ? taxableIncome * 0.10 :
-                    taxableIncome <= 1000000 ? (50000 + (taxableIncome - 500000) * 0.20) :
-                    (150000 + (taxableIncome - 1000000) * 0.30);
+        System.out.print("Enter your month income: ");
+        double salary = sc.nextDouble() * 12;
 
-        System.out.println("Annual Income Tax: Rs " + tax);
-        scanner.close();
+        System.out.print("Enter your month Hra: ");
+        double Hra = sc.nextDouble() * 12;
+
+        System.out.print("Enter your month Pf: ");
+        double Pfmoney = sc.nextDouble() * 12;
+
+        double deductions = Hra + Pfmoney;
+        double taxonincome = salary - deductions;
+
+        double tax = 0;
+        if (taxonincome <= 500000) {
+            tax = taxonincome * 0.10;
+        } else if (taxonincome <= 1000000) {
+            tax = (500000 * 0.10) + ((taxonincome - 500000) * 0.20);
+        } else {
+            tax = (500000 * 0.10) + (500000 * 0.20) + ((taxonincome - 1000000) * 0.30);
+        }
+
+        System.out.println("In hand ammount after cuttings");
+        System.out.println("Annual Salary " + salary);
+        System.out.println("Deductions in Hra and Pf " + deductions);
+        System.out.println("Taxable Income " + taxonincome);
+        System.out.println("Annual Income Tax " + tax);
+
+        sc.close();
     }
 }
 
